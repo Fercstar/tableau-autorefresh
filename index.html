@@ -1,52 +1,103 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Parameters Sample</title>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Parameters Sample</title>
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-    <!-- Extensions Library (this will be hosted on a CDN eventually) -->
-    <script src="tableau-ui.min.js"></script>
-    <script src="../../lib/tableau.extensions.1.latest.js"></script>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- Our extension's code -->
-    <script src="./auto_refresh.js"></script>
-  </head>
-  <body>
-    <div class="container-flex">
-      <div class="row">
-        <table class="table table-bordered table-sm col">
-            <thead class="thead-light">
-                <th class="text-center">Refresh Every</th>
-                <th class="text-center">Refresh In</th>
-            </thead>
-            <tbody>
-                <tr class="table-light">
-                    <td>
-                        <select id="refresh" class="form-control" onchange="updateInterval(this.value)">
-                            <option value="10000">10 Seconds</option>
-                            <option value="30000">30 Seconds</option>
-                            <option value="60000" selected>1 Minute</option>
-                            <option value="300000">5 Minutes</option>
-                        </select>
-                    </td>
-                    <td class="text-center text-danger h2" id="counter"></td>
-                    
-                </tr>
-            </tbody>
-            
-        </table>
-        
-      </div>
-      
-    </div>
-  </body>
+  <!-- Extensions Library (this will be hosted on a CDN eventually) -->
+  <script src="tableau-ui.min.js"></script>
+  <script src="../../lib/tableau.extensions.1.latest.js"></script>
+
+  <!-- Our extension's code -->
+  <script src="./auto_refresh.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <table class="table table-bordered table-sm col m-4">
+      <thead class="thead-light">
+        <th class="text-center">Refresh Every</th>
+        <th class="text-center">Refresh In</th>
+      </thead>
+      <tbody>
+        <tr class="table-light">
+          <td>
+            <select id="refresh" class="form-control-sm" onchange="updateInterval(this.value)">
+              <option value="10000">10 Seconds</option>
+              <option value="30000">30 Seconds</option>
+              <option value="60000" selected>1 Minute</option>
+              <option value="300000">5 Minutes</option>
+            </select>
+          </td>
+          <td class="text-center text-danger" id="counter"></td>
+
+        </tr>
+      </tbody>
+
+    </table>
+
+
+  </div>
+</body>
+
+<script>
+  var viz
+
+  var refreshInterval = 60000
+  var duration = refreshInterval
+
+  function refreshView() {
+    duration = refreshInterval
+  }
+
+  function updateInterval(value) {
+    clearInterval(interval);
+    interval = setInterval(refreshView, parseInt(value));
+    refreshView();
+    refreshInterval = parseInt(value)
+    clearInterval(countDownInterval)
+    duration = refreshInterval
+    countDownInterval = setInterval(countDown, 1000);
+  }
+
+  var interval = setInterval(refreshView, refreshInterval);
+
+  function countDown() {
+
+    duration -= 1000
+
+    if (duration < 0) {
+      duration = 0
+    }
+
+    // Time calculations for days, hours, minutes and seconds
+    var minutes = String(Math.floor((duration % (1000 * 60 * 60)) / (1000 * 60)));
+    var seconds = ("0" + String(Math.floor((duration % (1000 * 60)) / 1000))).slice(-2);
+
+    // Display the result in the element with id="demo"
+    var element = document.getElementById("counter")
+
+    element.innerHTML = minutes + ":" + seconds;
+
+    if (duration <= 5000) {
+      element.classList.add('text-danger')
+    } else {
+      element.classList.remove('text-danger')
+    }
+  }
+
+  // Update the count down every 1 second
+  var countDownInterval = setInterval(countDown, 1000);
+</script>
+
 </html>
