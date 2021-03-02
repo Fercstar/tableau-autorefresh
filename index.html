@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Parameters Sample</title>
+  <title>Auto Refresh</title>
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -36,7 +36,7 @@
         <td class="text-center align-middle p-0 m-0" id="auto-refresh-1" style="width: 100px;">
           Refresh In
         </td>
-        <td rowspan="2" id="manual-refresh" class="collapse">
+        <td rowspan="2" id="manual-refresh" class="collapse align-middle">
           <button class="btn btn-success"  onclick="refreshView()" style="width: 100px;">Refresh</button>
         </td>
 
@@ -49,7 +49,7 @@
             <option value="30000">30 Seconds</option>
             <option value="60000" selected>1 Minute</option>
             <option value="300000">5 Minutes</option>
-            <option value="Manual">Manual Refresh</option>
+            <option value="Manual">Pause</option>
           </select>
 
 
@@ -87,13 +87,13 @@
   function updateInterval(value) {
     if (value == "Manual") {
       value = 9999999
-      document.getElementById('auto-refresh-1').element.classList.add("collapse")
-      document.getElementById('auto-refresh-2').element.classList.add("collapse")
-      document.getElementById('manual-refresh').element.classList.remove("collapse")
+      document.getElementById('auto-refresh-1').classList.add("collapse")
+      document.getElementById('auto-refresh-2').classList.add("collapse")
+      document.getElementById('manual-refresh').classList.remove("collapse")
     } else {
-      document.getElementById('auto-refresh-1').element.classList.remove("collapse")
-      document.getElementById('auto-refresh-2').element.classList.remove("collapse")
-      document.getElementById('manual-refresh').element.classList.add("collapse")
+      document.getElementById('auto-refresh-1').classList.remove("collapse")
+      document.getElementById('auto-refresh-2').classList.remove("collapse")
+      document.getElementById('manual-refresh').classList.add("collapse")
     }
     clearInterval(interval);
     interval = setInterval(refreshView, parseInt(value));
