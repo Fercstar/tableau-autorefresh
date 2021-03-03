@@ -17,8 +17,8 @@
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
   </script>
 
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 
   <script src="./tableau-ui.min.js"></script>
   <script src="./tableau-extensions-1.latest.js"></script>
@@ -37,7 +37,7 @@
           Refresh In
         </td>
         <td rowspan="2" id="manual-refresh" class="collapse align-middle">
-          <button class="btn btn-success"  onclick="refreshView()" style="width: 100px;">Refresh</button>
+          <button class="btn btn-success" onclick="refreshView()" style="width: 100px;">Refresh</button>
         </td>
 
       </tr>
@@ -54,19 +54,32 @@
 
 
         </td>
-        <td class="text-center align-middle" id="auto-refresh-2">
-          <h4 class="text-danger m-0 p-0 " id="counter"></h4>
+        <td class="text-center align-middle" id="auto-refresh-2" onmouseover="hideCounter()" onmouseout="showCounter()">
+          <h4 class="text-danger m-0 p-0 " id="counter" onclick="refreshView()"></h4>
+          <button class="btn btn-success collapse" id="small-refresh" onclick="refreshView()">Refresh</button>
         </td>
 
       </tr>
     </tbody>
 
   </table>
-  
+
 
 </body>
 
 <script>
+  
+  function hideCounter() {
+    document.getElementById('counter').classList.add("collapse")
+    document.getElementById('small-refresh').classList.remove("collapse")
+  }
+
+  function showCounter() {
+    document.getElementById('counter').classList.remove("collapse")
+    document.getElementById('small-refresh').classList.add("collapse")
+  }
+
+
   tableau.extensions.initializeDialogAsync().then(() => {
     ReactDOM.render(
       React.createElement(TableauUI.Button, {
