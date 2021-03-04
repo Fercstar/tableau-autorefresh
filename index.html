@@ -34,10 +34,10 @@
         <td class="text-center align-middle p-0 m-0" style="width: 125px;">
           Refresh Every
         </td>
-        <td class="text-center align-middle p-0 m-0" id="auto-refresh-1" style="width: 100px;">
+        <td class="text-center align-middle p-0 m-0 collapse" id="auto-refresh-1" style="width: 100px;">
           Refresh In
         </td>
-        <td rowspan="2" id="manual-refresh" class="collapse align-middle" style="width: 100px;">
+        <td rowspan="2" id="manual-refresh" class="align-middle" style="width: 100px;">
           <button class="btn btn-outline-dark w-100 m-0 p-0" onclick="refreshView()" >Refresh<br><i class="fa fa-refresh lead" aria-hidden="true"></i></button>
         </td>
 
@@ -55,7 +55,7 @@
 
 
         </td>
-        <td class="text-center align-middle" id="auto-refresh-2" onmouseover="hideCounter()" onmouseout="showCounter()">
+        <td class="text-center align-middle collapse" id="auto-refresh-2" onmouseover="hideCounter()" onmouseout="showCounter()">
           <h4 class="text-danger m-0 p-0 " id="counter"></h4>
           <button class="btn btn-success collapse p-0 w-100" id="small-refresh" style="height: 31px;" onclick="refreshView()">Refresh</button>
         </td>
@@ -90,7 +90,7 @@
     );
   })
 
-  var refreshInterval = 60000
+  var refreshInterval = 9999999
   var duration = refreshInterval
 
   function refreshView() {
