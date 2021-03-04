@@ -16,6 +16,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
   </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
@@ -36,8 +37,8 @@
         <td class="text-center align-middle p-0 m-0" id="auto-refresh-1" style="width: 100px;">
           Refresh In
         </td>
-        <td rowspan="2" id="manual-refresh" class="collapse align-middle">
-          <button class="btn btn-success" onclick="refreshView()" style="width: 100px;">Refresh</button>
+        <td rowspan="2" id="manual-refresh" class="collapse align-middle" style="width: 100px;">
+          <button class="btn btn-outline-dark w-100 m-0 p-0" onclick="refreshView()" >Refresh<br><i class="fa fa-refresh lead" aria-hidden="true"></i></button>
         </td>
 
       </tr>
@@ -55,7 +56,7 @@
 
         </td>
         <td class="text-center align-middle" id="auto-refresh-2" onmouseover="hideCounter()" onmouseout="showCounter()">
-          <h4 class="text-danger m-0 p-0 " id="counter" onclick="refreshView()"></h4>
+          <h4 class="text-danger m-0 p-0 " id="counter"></h4>
           <button class="btn btn-success collapse p-0 w-100" id="small-refresh" style="height: 31px;" onclick="refreshView()">Refresh</button>
         </td>
 
