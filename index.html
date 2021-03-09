@@ -47,9 +47,9 @@
         <td class="text-center align-middle">
           <select id="refresh" class="form-control  form-control-sm m-0" onchange="updateInterval(this.value)">
             <!-- <option value="10000">10 Seconds</option> -->
-            <option value="30000">30 Seconds</option>
-            <option value="60000">1 Minute</option>
-            <option value="300000">5 Minutes</option>
+            <option value="35000">30 Seconds</option>
+            <option value="65000">1 Minute</option>
+            <option value="305000">5 Minutes</option>
             <option value="Manual" selected>Pause</option>
           </select>
 
@@ -91,6 +91,7 @@
   })
 
   var refreshInterval = 9999999
+  var namedInverval = 9999999
   var duration = refreshInterval
 
   function refreshView() {
@@ -116,6 +117,7 @@
     clearInterval(countDownInterval)
     duration = refreshInterval
     countDownInterval = setInterval(countDown, 1000);
+    namedInverval = refreshInterval - 5000
   }
 
   var interval = setInterval(refreshView, refreshInterval);
@@ -134,8 +136,12 @@
 
     // Display the result in the element with id="demo"
     var element = document.getElementById("counter")
-
-    element.innerHTML = minutes + ":" + seconds;
+    if (duration > namedInverval) {
+      element.innerHTML = "00:00"
+    } else {
+      element.innerHTML = minutes + ":" + seconds;
+    }
+    
 
     if (duration <= 5000) {
       element.classList.add('text-danger')
