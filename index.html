@@ -137,13 +137,13 @@
     // Display the result in the element with id="demo"
     var element = document.getElementById("counter")
     if (duration > namedInverval) {
-      element.innerHTML = "00:00"
+      element.innerHTML = "0:00"
     } else {
       element.innerHTML = minutes + ":" + seconds;
     }
     
 
-    if (duration <= 5000) {
+    if (duration <= 5000 || duration > namedInverval) {
       element.classList.add('text-danger')
     } else {
       element.classList.remove('text-danger')
