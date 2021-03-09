@@ -91,7 +91,7 @@
   })
 
   var refreshInterval = 9999999
-  var namedInverval = 9999999
+  var namedInverval = 0
   var duration = refreshInterval
 
   function refreshView() {
@@ -117,7 +117,12 @@
     clearInterval(countDownInterval)
     duration = refreshInterval
     countDownInterval = setInterval(countDown, 1000);
-    namedInverval = refreshInterval - 5000
+    if (value == "Manual") {
+      namedInverval = 0
+    } else {
+      namedInverval = refreshInterval - 5000
+    }
+    
   }
 
   var interval = setInterval(refreshView, refreshInterval);
